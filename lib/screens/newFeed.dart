@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 
 class newFeed extends StatefulWidget {
   const newFeed({Key? key}) : super(key: key);
@@ -20,14 +19,8 @@ class _newFeedState extends State<newFeed> {
       body: Container(
         height: 100,
         width: 500,
-        child:
-        GFListTile(
-            titleText:'Title',
-            subTitleText:'Lorem ipsum dolor sit amet, consectetur adipiscing',
-            icon: Icon(Icons.favorite)
-        ),
+        child: Text(" ")
       ),
     );
   }
-
 }
