@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:webfeed/webfeed.dart';
 import 'package:http/http.dart' as http;
@@ -24,6 +25,9 @@ class _SubFeedState extends State<SubFeed> {
   static const String feedOpenErrorMsg = 'Error Opening Feed.';
   static const String placeholderImg = 'assets/images/feed-placeholder.png';
   late GlobalKey<RefreshIndicatorState> _refreshKey;
+
+  final CollectionReference _fav =
+  FirebaseFirestore.instance.collection('fav');
 
   @override
   void initState() {
@@ -133,7 +137,15 @@ class _SubFeedState extends State<SubFeed> {
           title: title(item.title),
           subtitle: subtitle((item.pubDate ?? "").toString()),
           leading: thumbnail(item.enclosure?.url),
-          trailing: rightIcon(),
+          trailing: IconButton(
+              icon: Icon(
+                Icons.favorite_border_sharp,
+                color: Colors.green,
+              ),
+              onPressed: () async {
+                await _fav.add({"name": item.link});
+                print(item);
+                }),
           contentPadding: EdgeInsets.all(5.0),
           onTap: () => openFeed(item.link ?? ""),
         );

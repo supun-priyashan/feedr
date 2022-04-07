@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:feedr/screens/subfeed.dart';
 import 'package:flutter/material.dart';
 import 'package:feedr/screens/login.dart';
 import 'package:feedr/screens/home.dart';
 
-void main() {
+void main () async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -15,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Feedr',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // Define the default brightness and colors.
         scaffoldBackgroundColor: Colors.black,
