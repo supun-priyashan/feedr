@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class addFeed extends StatelessWidget {
-  const addFeed({Key? key}) : super(key: key);
+class AddFeed extends StatelessWidget {
+  const AddFeed({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = 'RSS Submission Link';
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Enter your email',
+              hintText: 'Enter your Link',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter the URL';
               }
               return null;
             },
@@ -55,7 +55,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   // Process data.
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('ADD'),
             ),
           ),
         ],
