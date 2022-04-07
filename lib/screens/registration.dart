@@ -172,7 +172,7 @@ class _RegistrationState extends State<Registration> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -187,7 +187,7 @@ class _RegistrationState extends State<Registration> {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            color: Colors.white,
+            color: Colors.grey,
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
