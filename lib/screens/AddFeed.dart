@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class AddFeed extends StatelessWidget {
-  const AddFeed({Key? key}) : super(key: key);
-
   static const String _title = 'RSS Submission Link';
+
+  @override
+  AddFeed({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,27 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  String? _name;
+
+  _ValidateURL() async {
+    print(_name);
+    if (Uri.parse(_name!).isAbsolute) {
+      try {
+        final client = http.Client();
+        final response = await client.get(Uri.parse(_name!));
+        print(response);
+        print(response.body);
+        // if (response.body != null) {
+        //   //
+        // }
+      } catch (e) {
+        //dd
+      }
+    } else {
+      print("Invalid Input");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -38,6 +61,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             decoration: const InputDecoration(
               hintText: 'Enter your Link',
             ),
+            onChanged: (text) {
+              setState(() {
+                _name = text;
+              });
+            },
             validator: (String? value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter the URL';
@@ -48,7 +76,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                //print(_name);
+                _ValidateURL();
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {
