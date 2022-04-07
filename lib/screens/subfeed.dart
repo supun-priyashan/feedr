@@ -16,13 +16,13 @@ class SubFeed extends StatefulWidget {
 
 class _SubFeedState extends State<SubFeed> {
   static const String FEED_URL =
-      'http://rss.cnn.com/rss/cnn_topstories.rss';
-  late RssFeed _feed;
-  late String _title;
+      'https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss';
+  RssFeed? _feed;
+  String? _title;
   static const loadingFeedMsg = 'Loading Feed...';
   static const String feedLoadErrorMsg = 'Error Loading Feed.';
   static const String feedOpenErrorMsg = 'Error Opening Feed.';
-  static const String placeholderImg = 'images/no_image.png';
+  static const String placeholderImg = 'assets/images/feed-placeholder.png';
   late GlobalKey<RefreshIndicatorState> _refreshKey;
 
   @override
@@ -30,18 +30,34 @@ class _SubFeedState extends State<SubFeed> {
     super.initState();
     _refreshKey = GlobalKey<RefreshIndicatorState>();
     updateTitle(widget.title);
-    load();
+    load().whenComplete(
+            (){
+          setState(() {});
+        }
+    );
   }
 
-  updateTitle(title) {
-    setState(() {
-      _title = title;
+  load() async {
+    updateTitle(loadingFeedMsg);
+    loadFeed().then((result) {
+      if (null == result || result.toString().isEmpty) {
+        updateTitle(feedLoadErrorMsg);
+        return;
+      }
+      updateFeed(result);
+      updateTitle(_feed!.title);
     });
   }
 
   updateFeed(feed) {
     setState(() {
       _feed = feed;
+    });
+  }
+
+  updateTitle(title) {
+    setState(() {
+      _title = title;
     });
   }
 
@@ -55,18 +71,6 @@ class _SubFeedState extends State<SubFeed> {
       return;
     }
     updateTitle(feedOpenErrorMsg);
-  }
-
-  load() async {
-    updateTitle(loadingFeedMsg);
-    loadFeed().then((result) {
-      if (null == result || result.toString().isEmpty) {
-        updateTitle(feedLoadErrorMsg);
-        return;
-      }
-      updateFeed(result);
-      updateTitle(_feed.title);
-    });
   }
 
   Future<RssFeed?> loadFeed() async {
@@ -103,7 +107,7 @@ class _SubFeedState extends State<SubFeed> {
       padding: EdgeInsets.only(left: 15.0),
       child: CachedNetworkImage(
         placeholder: (context, url) => Image.asset(placeholderImg),
-        imageUrl: imageUrl ?? "",
+        imageUrl: imageUrl,
         height: 50,
         width: 70,
         alignment: Alignment.center,
@@ -122,9 +126,9 @@ class _SubFeedState extends State<SubFeed> {
 
   list() {
     return ListView.builder(
-      itemCount: _feed.items?.length,
+      itemCount: _feed!.items?.length,
       itemBuilder: (BuildContext context, int index) {
-        final item = _feed.items![index];
+        final item = _feed!.items![index];
         return ListTile(
           title: title(item.title),
           subtitle: subtitle((item.pubDate ?? "").toString()),
@@ -138,7 +142,7 @@ class _SubFeedState extends State<SubFeed> {
   }
 
   isFeedEmpty() {
-    return null == _feed || null == _feed.items;
+    return null == _feed || null == _feed!.items;
   }
 
   body() {
@@ -157,7 +161,7 @@ class _SubFeedState extends State<SubFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: Text(_title!),
       ),
       body: body(),
     );
