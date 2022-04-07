@@ -1,3 +1,4 @@
+import 'package:feedr/screens/registration.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -10,82 +11,150 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  // form key
+  final _formKey = GlobalKey<FormState>();
+
+  // editing controller
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("fdsfdsfr"),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              // child: Center(
-              //   child: Container(
-              //       width: 200,
-              //       height: 150,
-              //       /*decoration: BoxDecoration(
-              //           color: Colors.red,
-              //           borderRadius: BorderRadius.circular(50.0)),*/
-              //       child: Image.asset('images/logo.png')),
-              // ),
-            ),
-            Padding(
-              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              //padding: EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
+    //email field
+    final emailField = TextFormField(
+        autofocus: false,
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        // validator: (value) {
+        //   if (value!.isEmpty) {
+        //     return ("Please Enter Your Email");
+        //   }
+        //   // reg expression for email validation
+        //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+        //     return ("Please Enter a valid email");
+        //   }
+        //   return null;
+        // },
+        onSaved: (value) {
+          emailController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.mail),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Email",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
 
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
-              ),
-            ),
-            FlatButton(
-              onPressed: (){
-                //TODO FORGOT PASSWORD SCREEN GOES HERE
-              },
-              child: Text(
-                'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
-              ),
-            ),
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child: FlatButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //     context, MaterialPageRoute(builder: (_) => HomePage()));
-                },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+    //password field
+    final passwordField = TextFormField(
+        autofocus: false,
+        controller: passwordController,
+        obscureText: true,
+        // validator: (value) {
+        //   RegExp regex = new RegExp(r'^.{6,}$');
+        //   if (value!.isEmpty) {
+        //     return ("Password is required for login");
+        //   }
+        //   if (!regex.hasMatch(value)) {
+        //     return ("Enter Valid Password(Min. 6 Character)");
+        //   }
+        // },
+        onSaved: (value) {
+          passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.vpn_key),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Password",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+    //button field
+    final loginButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: () {
+            // signIn(emailController.text, passwordController.text);
+          },
+          child: Text(
+            "Login",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+    );
+
+    return Scaffold(
+        backgroundColor: Colors.grey,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              color: Colors.grey,
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 200,
+                        // child: Image.asset(
+                        //   "assets/feedassets.jpg",
+                        //   fit: BoxFit.contain,
+                        // )
+                      ),
+                      SizedBox(height: 45),
+                      emailField,
+                      SizedBox(height: 25),
+                      passwordField,
+                      SizedBox(height: 35),
+                      loginButton,
+                      SizedBox(height: 15),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Don't have an account? "),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Registration()));
+                              },
+                              child: Text(
+                                "SignUp",
+                                style: TextStyle(
+                                    color: Colors.redAccent,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                            )
+                          ])
+                    ],
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 130,
-            ),
-            Text('New User? Create Account')
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
+
+    // appBar: AppBar(
+    //   title: Text("fdsfdsfr"),
+    // ),
+    // body: Container(
+    //   child: Text("dsfds"),
+    // ),
   }
 }
