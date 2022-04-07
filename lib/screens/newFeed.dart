@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 
 class newFeed extends StatefulWidget {
   const newFeed({Key? key}) : super(key: key);
