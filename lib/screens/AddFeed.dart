@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 class AddFeed extends StatelessWidget {
   static const String _title = 'RSS Submission Link';
 
+  final String title = 'AddFeed';
+  static const String routeName = '/AddFeed';
+
   @override
   AddFeed({Key? key}) : super(key: key);
 
@@ -83,12 +86,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () async {
-                
-                if(_ValidateURL()){
+
+                //if(_ValidateURL()){
                   await _feeds.add({"url": _name});
                   print(_name);
-                }
-                
+                //}
+
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {

@@ -19,10 +19,7 @@ class _newFeedState extends State<newFeed> {
       body: Container(
         height: 100,
         width: 500,
-        child: GFListTile(
-            titleText: 'Title',
-            subTitleText: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
-            icon: Icon(Icons.favorite)),
+        child: Text(" ")
       ),
     );
   }

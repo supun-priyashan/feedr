@@ -1,9 +1,13 @@
+
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:feedr/screens/subfeed.dart';
 import 'package:flutter/material.dart';
 import 'package:feedr/screens/login.dart';
 import 'package:feedr/screens/home.dart';
+import 'package:feedr/screens/AddFeed.dart';
+import 'package:feedr/screens/feed.dart';
+
 
 void main () async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +48,9 @@ class MyApp extends StatelessWidget {
         Home.routeName: (context) => Home(),
         Login.routeName: (context) => Login(),
         SubFeed.routeName: (context) => SubFeed(),
+        Feed.routeName: (context) => Feed(),
+        AddFeed.routeName: (context) => AddFeed(),
+
       },
     );
   }
