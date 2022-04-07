@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "789790694633",
+    "project_id": "feedr-bdeeb",
+    "storage_bucket": "feedr-bdeeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789790694633:android:c3ed27f3439c6495f6e478",
+        "android_client_info": {
+          "package_name": "com.feedr.feedr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789790694633-n6j5p3s40djfuagpe4t2iqmqcrt77us2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlBO-CDYRYx7XqDUJXkjUcr9TLzN4twLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789790694633-n6j5p3s40djfuagpe4t2iqmqcrt77us2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
