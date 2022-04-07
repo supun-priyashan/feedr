@@ -34,6 +34,13 @@ class _RegistrationState extends State<Registration> {
         //   }
         //   return null;
         // },
+
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("First Name cannot be Empty");
+          }
+          return null;
+        },
         onSaved: (value) {
           firstNameEditingController.text = value!;
         },
@@ -52,12 +59,12 @@ class _RegistrationState extends State<Registration> {
         autofocus: false,
         controller: secondNameEditingController,
         keyboardType: TextInputType.name,
-        // validator: (value) {
-        //   if (value!.isEmpty) {
-        //     return ("Second Name cannot be Empty");
-        //   }
-        //   return null;
-        // },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Second Name cannot be Empty");
+          }
+          return null;
+        },
         onSaved: (value) {
           secondNameEditingController.text = value!;
         },
@@ -76,17 +83,17 @@ class _RegistrationState extends State<Registration> {
         autofocus: false,
         controller: emailEditingController,
         keyboardType: TextInputType.emailAddress,
-        // validator: (value) {
-        //   if (value!.isEmpty) {
-        //     return ("Please Enter Your Email");
-        //   }
-        //   // reg expression for email validation
-        //   if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-        //       .hasMatch(value)) {
-        //     return ("Please Enter a valid email");
-        //   }
-        //   return null;
-        // },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Email");
+          }
+          // reg expression for email validation
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid email");
+          }
+          return null;
+        },
         onSaved: (value) {
           firstNameEditingController.text = value!;
         },
@@ -105,15 +112,15 @@ class _RegistrationState extends State<Registration> {
         autofocus: false,
         controller: passwordEditingController,
         obscureText: true,
-        // validator: (value) {
-        //   RegExp regex = new RegExp(r'^.{6,}$');
-        //   if (value!.isEmpty) {
-        //     return ("Password is required for login");
-        //   }
-        //   if (!regex.hasMatch(value)) {
-        //     return ("Enter Valid Password(Min. 6 Character)");
-        //   }
-        // },
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Password is required for login");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid Password(Min. 6 Character)");
+          }
+        },
         onSaved: (value) {
           firstNameEditingController.text = value!;
         },
@@ -132,13 +139,13 @@ class _RegistrationState extends State<Registration> {
         autofocus: false,
         controller: confirmPasswordEditingController,
         obscureText: true,
-        // validator: (value) {
-        //   if (confirmPasswordEditingController.text !=
-        //       passwordEditingController.text) {
-        //     return "Password don't match";
-        //   }
-        //   return null;
-        // },
+        validator: (value) {
+          if (confirmPasswordEditingController.text !=
+              passwordEditingController.text) {
+            return "Password don't match";
+          }
+          return null;
+        },
         onSaved: (value) {
           confirmPasswordEditingController.text = value!;
         },
@@ -162,6 +169,11 @@ class _RegistrationState extends State<Registration> {
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
             // signUp(emailEditingController.text, passwordEditingController.text);
+            // Validate will return true if the form is valid, or false if
+            // the form is invalid.
+            if (_formKey.currentState!.validate()) {
+              // Process data.
+            }
           },
           child: Text(
             "SignUp",
@@ -172,7 +184,7 @@ class _RegistrationState extends State<Registration> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -187,7 +199,7 @@ class _RegistrationState extends State<Registration> {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            color: Colors.grey,
+            color: Colors.black,
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
