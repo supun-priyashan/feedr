@@ -28,8 +28,8 @@ class _AddFavouriteState extends State<AddFavourite> {
             icon: Icon(Icons.arrow_back_ios, color: Colors.green),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text(widget.title),
           centerTitle: true,
+          title: Text(widget.title),
         ),
         body: Column(
           children: [

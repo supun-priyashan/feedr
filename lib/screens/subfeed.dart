@@ -146,7 +146,6 @@ class _SubFeedState extends State<SubFeed> {
                 color: Colors.green,
               ),
               onPressed: () async {
-                await _fav.add({"link": item.link,"subtitle": item.pubDate ?? item.author ?? "","thumbnail": item.enclosure?.url,"title": item.title});
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -181,6 +180,11 @@ class _SubFeedState extends State<SubFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.green),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        centerTitle: true,
         title: Text(_title!),
       ),
       body: body(),

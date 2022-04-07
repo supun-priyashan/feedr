@@ -61,7 +61,6 @@ class _FeedPageState extends State<FeedPage> {
             }
 
             return ListView(
-
               children: snapshot.data!.docs.map((DocumentSnapshot document){
                 Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                 return Card(
