@@ -1,9 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:webfeed/webfeed.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import 'package:feedr/screens/addfavourite.dart';
 
 class SubFeed extends StatefulWidget {
   const SubFeed({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _SubFeedState extends State<SubFeed> {
       'https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss';
   RssFeed? _feed;
   String? _title;
+  RssItem? feed;
   static const loadingFeedMsg = 'Loading Feed...';
   static const String feedLoadErrorMsg = 'Error Loading Feed.';
   static const String feedOpenErrorMsg = 'Error Opening Feed.';
@@ -135,7 +138,7 @@ class _SubFeedState extends State<SubFeed> {
         final item = _feed!.items![index];
         return ListTile(
           title: title(item.title),
-          subtitle: subtitle((item.pubDate ?? "").toString()),
+          subtitle: subtitle((item.pubDate ?? item.author ?? "").toString()),
           leading: thumbnail(item.enclosure?.url),
           trailing: IconButton(
               icon: Icon(
@@ -143,8 +146,13 @@ class _SubFeedState extends State<SubFeed> {
                 color: Colors.green,
               ),
               onPressed: () async {
-                await _fav.add({"name": item.link});
-                print(item);
+                await _fav.add({"link": item.link,"subtitle": item.pubDate ?? item.author ?? "","thumbnail": item.enclosure?.url,"title": item.title});
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddFavourite(feed: item),
+                  ),
+                );
                 }),
           contentPadding: EdgeInsets.all(5.0),
           onTap: () => openFeed(item.link ?? ""),
