@@ -1,4 +1,6 @@
 import 'package:feedr/screens/login.dart';
+import 'package:feedr/screens/newFeed.dart';
+import 'package:feedr/screens/addFeed.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -21,7 +23,8 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             ElevatedButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Login()));}, child: Text("login")),
-            ElevatedButton(onPressed: (){}, child: Text("gfdh")),
+            ElevatedButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>newFeed()));}, child: Text("New Feed")),
+            ElevatedButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>addFeed()));}, child: Text("Add New Feed")),
             ElevatedButton(onPressed: (){}, child: Text("nbvn")),
           ],
         ),
