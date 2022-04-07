@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,24 +30,29 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final CollectionReference _feeds =
+      FirebaseFirestore.instance.collection('feeds');
+
   String? _name;
 
-  _ValidateURL() async {
-    print(_name);
+   _ValidateURL() async {
+    //print(_name);
     if (Uri.parse(_name!).isAbsolute) {
       try {
         final client = http.Client();
         final response = await client.get(Uri.parse(_name!));
-        print(response);
-        print(response.body);
+        // print(response);
+        // print(response.body);
+        return true;
         // if (response.body != null) {
         //   //
         // }
       } catch (e) {
-        //dd
+        return false;
       }
     } else {
       print("Invalid Input");
+      return false;
     }
   }
 
@@ -77,8 +83,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () async {
-                //print(_name);
-                _ValidateURL();
+                
+                if(_ValidateURL()){
+                  await _feeds.add({"url": _name});
+                  print(_name);
+                }
+                
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {
