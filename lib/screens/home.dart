@@ -1,4 +1,5 @@
 import 'package:feedr/components/sidenav.dart';
+import 'package:feedr/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:feedr/screens/login.dart';
@@ -6,6 +7,7 @@ import 'package:feedr/screens/feed.dart';
 import 'package:feedr/screens/subfeed.dart';
 import 'package:feedr/screens/AddFeed.dart';
 import 'package:feedr/screens/userlist.dart';
+import 'package:feedr/screens/profile.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -58,6 +60,12 @@ class _HomeState extends State<Home> {
                       MaterialPageRoute(builder: (context) => UserList()));
                 },
                 child: Text("User List")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Profile()));
+                },
+                child: Text("User Profile")),
           ],
         ),
       ),
