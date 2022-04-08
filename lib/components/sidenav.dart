@@ -1,3 +1,4 @@
+import 'package:feedr/screens/favourites.dart';
 import 'package:feedr/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,11 @@ class _SideNavState extends State<SideNav> {
               ListTile(
                 leading: const Icon(Icons.favorite_outline),
                 title: const Text("Favourites"),
-                onTap: (){},
+                onTap: (){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const Favourites()
+                  ));
+                },
               ),
               const Divider(),
               Spacer(),

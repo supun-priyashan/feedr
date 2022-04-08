@@ -1,4 +1,5 @@
 
+import 'package:feedr/screens/favourites.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:feedr/screens/subfeed.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         SubFeed.routeName: (context) => SubFeed(),
         Feed.routeName: (context) => Feed(),
         AddFeed.routeName: (context) => AddFeed(),
-
+        Favourites.routeName: (context) => Favourites(),
       },
     );
   }
