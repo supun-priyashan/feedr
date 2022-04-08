@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../components/sidenav.dart';
+
 class AddFeed extends StatefulWidget {
   const AddFeed({Key? key}) : super(key: key);
 
@@ -48,6 +50,7 @@ class _AddFeedState extends State<AddFeed> {
     return
       Scaffold(
         appBar: AppBar(title: Text(widget._title)),
+          drawer: const SideNav(),
         body: Form(
       key: _formKey,
       child: Column(

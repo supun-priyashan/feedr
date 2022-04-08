@@ -1,3 +1,4 @@
+import 'package:feedr/screens/AddFeed.dart';
 import 'package:feedr/screens/favourites.dart';
 import 'package:feedr/screens/feed.dart';
 import 'package:feedr/screens/home.dart';
@@ -26,7 +27,7 @@ class _SideNavState extends State<SideNav> {
                 leading: const Icon(Icons.home_outlined),
                 title: const Text("Home"),
                 onTap: (){Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const Feed()
+                    builder: (context) => const Home()
                 ));
                   },
               ),
@@ -36,6 +37,15 @@ class _SideNavState extends State<SideNav> {
                 onTap: (){
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const Favourites()
+                  ));
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.add),
+                title: const Text("Add new feed"),
+                onTap: (){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const AddFeed()
                   ));
                 },
               ),
