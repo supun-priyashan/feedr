@@ -1,4 +1,5 @@
 import 'package:feedr/screens/favourites.dart';
+import 'package:feedr/screens/feed.dart';
 import 'package:feedr/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class _SideNavState extends State<SideNav> {
                 leading: const Icon(Icons.home_outlined),
                 title: const Text("Home"),
                 onTap: (){Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const Home()
+                    builder: (context) => const Feed()
                 ));
                   },
               ),
@@ -43,6 +44,10 @@ class _SideNavState extends State<SideNav> {
               ListTile(
                   leading: Icon(Icons.person_outline_rounded),
                   title: Text('Profile')
+              ),
+            ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text('Sign out')
               ),
             ],
         )

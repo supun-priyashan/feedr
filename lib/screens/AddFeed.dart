@@ -2,35 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class AddFeed extends StatelessWidget {
-  static const String _title = 'RSS Submission Link';
+class AddFeed extends StatefulWidget {
+  const AddFeed({Key? key}) : super(key: key);
+
+  final String _title = 'RSS Submission Link';
 
   final String title = 'AddFeed';
   static const String routeName = '/AddFeed';
 
   @override
-  AddFeed({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: const MyStatefulWidget(),
-      ),
-    );
-  }
+  State<AddFeed> createState() => _AddFeedState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _AddFeedState extends State<AddFeed> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final CollectionReference _feeds =
@@ -61,7 +45,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return
+      Scaffold(
+        appBar: AppBar(title: Text(widget._title)),
+        body: Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,6 +90,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ],
       ),
-    );
+    ));
   }
 }

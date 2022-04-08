@@ -2,6 +2,7 @@ import 'package:feedr/screens/favFeeds.dart';
 import 'package:feedr/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Favourites extends StatefulWidget {
   const Favourites({Key? key}) : super(key: key);
@@ -70,7 +71,6 @@ class _FavouritesState extends State<Favourites> {
                                 );
                               },
                               onLongPress: () {
-                                print(documentSnapshot.id.toString());
                                 showEditDialog(documentSnapshot.id.toString());
                               },
                             ),
@@ -103,6 +103,15 @@ class _FavouritesState extends State<Favourites> {
                 child: Text("Add"),
                 onPressed: () async {
                   await _favCat.add({"name": category.text});
+                  Fluttertoast.showToast(
+                      msg: "Category added",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.grey,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
                   Navigator.of(context).pop();
                   category.clear();
                 },
@@ -126,6 +135,15 @@ class _FavouritesState extends State<Favourites> {
                     child: Text("Delete"),
                     onPressed: () async {
                       await _favCat.doc(id).delete();
+                      Fluttertoast.showToast(
+                          msg: "Successfully deleted",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
                       Navigator.of(context).pop();
                       category.clear();
                     },
@@ -134,6 +152,15 @@ class _FavouritesState extends State<Favourites> {
                     child: Text("Save"),
                     onPressed: () async {
                       await _favCat.doc(id).update({"name": category});
+                      Fluttertoast.showToast(
+                          msg: "Edit Success",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
                       Navigator.of(context).pop();
                       category.clear();
                     },

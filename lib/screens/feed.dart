@@ -1,34 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:feedr/screens/subfeed.dart';
 import 'package:feedr/screens/updatefeed.dart';
 import 'package:flutter/material.dart';
 
-
-class Feed extends StatelessWidget {
+class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
 
   final String title = 'feed';
   static const String routeName = '/feed';
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // Hide the debug banner
-      debugShowCheckedModeBanner: false,
-      title: 'Kindacode.com',
-      theme: ThemeData.light(),
-      home: const FeedPage(),
-    );
-  }
+  _FeedState createState() => _FeedState();
 }
 
-class FeedPage extends StatefulWidget {
-  const FeedPage({Key? key}) : super(key: key);
-
-  @override
-  _FeedPageState createState() => _FeedPageState();
-}
-
-class _FeedPageState extends State<FeedPage> {
+class _FeedState extends State<Feed> {
   // Dummy Product Data Here
   final List myProducts = List.generate(100, (index) {
     return {"id": index, "title": "Product #$index", "price": index + 1};
@@ -47,7 +32,7 @@ class _FeedPageState extends State<FeedPage> {
     return Scaffold
       (
         appBar: AppBar(
-          title: const Text('Kindacode.com'),
+          title: const Text('Feeds'),
         ),
         body: StreamBuilder<QuerySnapshot>(
           stream: _usersStream,
@@ -82,12 +67,16 @@ class _FeedPageState extends State<FeedPage> {
                       },
                       child: Text("Delete")),
                   title: Text(data['url']),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SubFeed(),
+                      ),
+                    );
+                  },
                 ));
               }).toList(),
-
-
-
-
             );
 
           },

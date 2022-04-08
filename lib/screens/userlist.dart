@@ -11,38 +11,100 @@ class _UserListState extends State<UserList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: ListView(children: <Widget>[
-          Center(
-              child: Text(
-            'Students',
-            style: TextStyle(
-                fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold),
-          )),
-          DataTable(
-            columns: [
-              DataColumn(label: Text('UserNo')),
-              DataColumn(label: Text('First Name')),
-              DataColumn(label: Text('Last Name')),
-            ],
-            rows: [
-              DataRow(cells: [
-                DataCell(Text('1')),
-                DataCell(Text('Arya')),
-                DataCell(Text('6')),
-              ]),
-              DataRow(cells: [
-                DataCell(Text('12')),
-                DataCell(Text('John')),
-                DataCell(Text('9')),
-              ]),
-              DataRow(cells: [
-                DataCell(Text('42')),
-                DataCell(Text('Tony')),
-                DataCell(Text('8')),
-              ]),
-            ],
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.green),
+          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Home())),
+        ),
+        centerTitle: true,
+        title: Text("Manage users"),
+      ),
+      body: Column(
+        children: [
+          OutlinedButton(
+            onPressed: (){
+              inputCategory();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.add),
+                Text('Add new favourites collection'),
+              ],
+            ),
           ),
-        ]));
+          StreamBuilder(
+              stream: _favCat.snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                if (streamSnapshot.hasData) {
+                  return Expanded(
+                      child:
+                      ListView.builder(
+                        itemCount: streamSnapshot.data!.docs.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                          return Card(
+                            margin: const EdgeInsets.all(10),
+                            child: ListTile(
+                              leading: Icon(Icons.favorite, color: Colors.green,),
+                              title: Text(documentSnapshot['name']),
+                              onTap: () {
+                                CollectionReference favou = FirebaseFirestore.instance.collection('favCat').doc(documentSnapshot.id).collection('favs');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FavFeeds(title: documentSnapshot['name'], fav: favou),
+                                  ),
+                                );
+                              },
+                              onLongPress: () {
+                                showEditDialog(documentSnapshot.id.toString());
+                              },
+                            ),
+                          );
+                        },
+                      )
+                  );
+                } else {
+                  return Center(
+                      child: CircularProgressIndicator()
+                  );
+                }
+              })
+        ],
+      ),
+    );
   }
+
+  Future inputCategory() => showDialog(
+      context: context,
+      builder: (context) =>
+          AlertDialog(
+            title: Text("Add new category"),
+            content: TextField(
+              decoration: InputDecoration(hintText: "Category name"),
+              controller: category,
+            ),
+            actions: [
+              TextButton(
+                child: Text("Add"),
+                onPressed: () async {
+                  await _favCat.add({"name": category.text});
+                  Fluttertoast.showToast(
+                      msg: "Category added",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.grey,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                  Navigator.of(context).pop();
+                  category.clear();
+                },
+              )
+            ],
+          )
+  );
 }

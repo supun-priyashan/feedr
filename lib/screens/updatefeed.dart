@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class UpdateFeed extends StatefulWidget {
-  static const String _title = 'RSS Submission Link';
-
-
+  static const String _title = 'Update link';
 
   final String title = 'UpdateFeed';
   static const String routeName = '/updatefeed';
@@ -30,10 +28,8 @@ class _UpdateFeedState extends State<UpdateFeed> {
     late TextEditingController editurl = TextEditingController(text: url);
 
     String? _name;
-    return MaterialApp(
-      title: "_title",
-      home: Scaffold(
-        appBar: AppBar(title: const Text("_title")),
+    return Scaffold(
+        appBar: AppBar(title: Text(widget.title)),
         body: Form(
           key: _formKey,
           child: Column(
@@ -69,7 +65,6 @@ class _UpdateFeedState extends State<UpdateFeed> {
                         .doc(widget.feedId)
                         .update({"url": editurl.text});
                     //}
-
                     // Validate will return true if the form is valid, or false if
                     // the form is invalid.
                     if (_formKey.currentState!.validate()) {
@@ -82,7 +77,6 @@ class _UpdateFeedState extends State<UpdateFeed> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
