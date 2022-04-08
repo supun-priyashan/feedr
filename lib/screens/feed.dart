@@ -10,14 +10,11 @@ class Feed extends StatefulWidget {
   static const String routeName = '/feed';
 
   @override
-  _FeedState createState() => _FeedState();
+  State<Feed> createState() => _FeedState();
 }
 
 class _FeedState extends State<Feed> {
-  // Dummy Product Data Here
-  final List myProducts = List.generate(100, (index) {
-    return {"id": index, "title": "Product #$index", "price": index + 1};
-  });
+
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('feeds').snapshots();
   final CollectionReference urls =
   FirebaseFirestore.instance.collection('feeds');
@@ -31,23 +28,13 @@ class _FeedState extends State<Feed> {
   Widget build(BuildContext context) {
     return Scaffold
       (
-        appBar: AppBar(
-          title: const Text('Feeds'),
-        ),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: _usersStream,
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong');
-            }
-
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text("Loading");
-            }
-
+        body: StreamBuilder(
+          stream: urls.snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if(snapshot.hasData){
             return ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document){
-                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                Map<String, dynamic>? data = document.data()! as Map<String, dynamic>;
                 return Card(
                     margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: ListTile(
@@ -77,8 +64,9 @@ class _FeedState extends State<Feed> {
                   },
                 ));
               }).toList(),
-            );
-
+            );} else {
+                return Text('Something went wrong');
+            }
           },
         ),);
   }

@@ -1,5 +1,6 @@
 import 'package:feedr/screens/home.dart';
 import 'package:feedr/screens/registration.dart';
+import 'package:feedr/screens/userlist.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -181,9 +182,17 @@ class _LoginState extends State<Login> {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
-                  Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Home())),
+              if(email == "admin@gmail.com"){
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => UserList())),
+              }
+              else{
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Home())),
+              }
+
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

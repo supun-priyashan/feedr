@@ -28,52 +28,7 @@ class _HomeState extends State<Home> {
       ),
       drawer: const SideNav(),
       body: Container(
-        child: Column(
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Login()));
-                },
-                child: Text("login")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Feed()));
-                },
-                child: Text("feed")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => AddFeed()));
-                },
-                child: Text("Add Feed")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => SubFeed()));
-                },
-                child: Text("subfeed")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => UserList()));
-                },
-                child: Text("User List")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Profile()));
-                },
-                child: Text("User Profile")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => EditProfile()));
-                },
-                child: Text("Edit Profile"))
-          ],
-        ),
+        child: Feed()
       ),
     );
   }

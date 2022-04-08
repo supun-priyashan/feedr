@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
-      initialRoute: Home.routeName,
+      initialRoute: Login.routeName,
       routes: {
         Home.routeName: (context) => Home(),
         Login.routeName: (context) => Login(),

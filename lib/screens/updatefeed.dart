@@ -64,6 +64,7 @@ class _UpdateFeedState extends State<UpdateFeed> {
                     await urls
                         .doc(widget.feedId)
                         .update({"url": editurl.text});
+                     Navigator.of(context).pop();
                     //}
                     // Validate will return true if the form is valid, or false if
                     // the form is invalid.
