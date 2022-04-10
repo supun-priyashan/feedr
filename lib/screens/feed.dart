@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feedr/screens/subfeed.dart';
 import 'package:feedr/screens/updatefeed.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
@@ -57,6 +58,7 @@ class _FeedState extends State<Feed> {
                           IconButton(
                             onPressed: () {
                               _deleteProduct(document.id);
+                              Fluttertoast.showToast(msg: "Deleted Feed successfully");
                             },
                             icon: Icon(Icons.delete_outline,color: Colors.red,),
                           ),
