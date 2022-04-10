@@ -58,7 +58,7 @@ class _FeedState extends State<Feed> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SubFeed(),
+                        builder: (context) => SubFeed(data['url']),
                       ),
                     );
                   },

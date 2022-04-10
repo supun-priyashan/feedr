@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
       routes: {
         Home.routeName: (context) => Home(),
         Login.routeName: (context) => Login(),
-        SubFeed.routeName: (context) => SubFeed(),
         Feed.routeName: (context) => Feed(),
         AddFeed.routeName: (context) => AddFeed(),
         Favourites.routeName: (context) => Favourites(),

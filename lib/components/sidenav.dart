@@ -2,7 +2,10 @@ import 'package:feedr/screens/AddFeed.dart';
 import 'package:feedr/screens/favourites.dart';
 import 'package:feedr/screens/feed.dart';
 import 'package:feedr/screens/home.dart';
+import 'package:feedr/screens/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SideNav extends StatefulWidget {
   const SideNav({Key? key}) : super(key: key);
@@ -51,13 +54,12 @@ class _SideNavState extends State<SideNav> {
               ),
               const Divider(),
               Spacer(),
-              ListTile(
-                  leading: Icon(Icons.person_outline_rounded),
-                  title: Text('Profile')
-              ),
             ListTile(
                   leading: Icon(Icons.logout),
-                  title: Text('Sign out')
+                  title: Text('Sign out'),
+              onTap: () {
+                    _signOut();
+              },
               ),
             ],
         )
@@ -73,6 +75,25 @@ class _SideNavState extends State<SideNav> {
           children: <Widget> [sideNavItems(context)],
         ),
       ),
+    );
+  }
+
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Login(),
+      ),
+    );
+    Fluttertoast.showToast(
+        msg: "Logout Success",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+        fontSize: 16.0
     );
   }
 }
