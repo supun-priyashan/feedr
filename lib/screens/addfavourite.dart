@@ -103,25 +103,13 @@ class _AddFavouriteState extends State<AddFavourite> {
                 onPressed: () async {
                   if(category.text.isEmpty){
                     Fluttertoast.showToast(
-                        msg: "Name cannot be empty!",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.grey,
-                        textColor: Colors.white,
-                        fontSize: 16.0
+                        msg: "Name cannot be empty!"
                     );
                   } else {
                     await _favCat.add({"name": category.text});
                     Navigator.of(context).pop();
                     Fluttertoast.showToast(
-                        msg: "Category added",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.grey,
-                        textColor: Colors.white,
-                        fontSize: 16.0
+                        msg: "Category added"
                     );
                     category.clear();
                   }
@@ -135,13 +123,7 @@ class _AddFavouriteState extends State<AddFavourite> {
     RssItem item = widget.feed;
     _favCat.doc(id).collection("favs").add({"link": item.link,"subtitle": item.pubDate ?? item.author ?? "","thumbnail": item.enclosure?.url,"title": item.title}).then((value) => Navigator.of(context).pop());
     Fluttertoast.showToast(
-        msg: "Added to favourites",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-        fontSize: 16.0
+        msg: "Added to favourites"
     );
   }
 
@@ -163,13 +145,7 @@ class _AddFavouriteState extends State<AddFavourite> {
                     await _favCat.doc(id).delete();
                     Navigator.of(context).pop();
                     Fluttertoast.showToast(
-                        msg: "Deleted successfully",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.grey,
-                        textColor: Colors.white,
-                        fontSize: 16.0
+                        msg: "Deleted successfully"
                     );
                     nameCtrl.clear();
                   },
@@ -179,24 +155,12 @@ class _AddFavouriteState extends State<AddFavourite> {
                   onPressed: () async {
                     if(nameCtrl.text.isEmpty){
                       Fluttertoast.showToast(
-                          msg: "Name cannot be empty!",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.grey,
-                          textColor: Colors.white,
-                          fontSize: 16.0
+                          msg: "Name cannot be empty!"
                       );
                     } else {
                       await _favCat.doc(id).update({"name": nameCtrl.text});
                       Fluttertoast.showToast(
-                          msg: "Edited successfully",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.grey,
-                          textColor: Colors.white,
-                          fontSize: 16.0
+                          msg: "Edited successfully"
                       );
                       Navigator.of(context).pop();
                       nameCtrl.clear();
