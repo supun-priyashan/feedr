@@ -153,7 +153,7 @@ class _FavouritesState extends State<Favourites> {
                   TextButton(
                     child: Text("Save"),
                     onPressed: () async {
-                      await _favCat.doc(id).update({"name": nameCtrl});
+                      await _favCat.doc(id).update({"name": nameCtrl.text});
                       Fluttertoast.showToast(
                           msg: "Edit Success",
                           toastLength: Toast.LENGTH_SHORT,
