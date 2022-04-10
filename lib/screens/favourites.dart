@@ -147,13 +147,13 @@ class _FavouritesState extends State<Favourites> {
                           fontSize: 16.0
                       );
                       Navigator.of(context).pop();
-                      category.clear();
+                      nameCtrl.clear();
                     },
                   ),
                   TextButton(
                     child: Text("Save"),
                     onPressed: () async {
-                      await _favCat.doc(id).update({"name": category});
+                      await _favCat.doc(id).update({"name": nameCtrl.text});
                       Fluttertoast.showToast(
                           msg: "Edit Success",
                           toastLength: Toast.LENGTH_SHORT,
@@ -164,7 +164,7 @@ class _FavouritesState extends State<Favourites> {
                           fontSize: 16.0
                       );
                       Navigator.of(context).pop();
-                      category.clear();
+                      nameCtrl.clear();
                     },
                   )
                 ],

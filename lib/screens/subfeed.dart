@@ -8,9 +8,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feedr/screens/addfavourite.dart';
 
 class SubFeed extends StatefulWidget {
-  const SubFeed({Key? key}) : super(key: key);
+  const SubFeed(this.url, {Key? key}) : super(key: key);
 
   final String title = 'subfeed';
+  final String url;
   static const String routeName = '/subfeed';
 
   @override
@@ -18,8 +19,7 @@ class SubFeed extends StatefulWidget {
 }
 
 class _SubFeedState extends State<SubFeed> {
-  static const String FEED_URL =
-      'https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss';
+
   RssFeed? _feed;
   String? _title;
   RssItem? feed;
@@ -83,7 +83,7 @@ class _SubFeedState extends State<SubFeed> {
   Future<RssFeed?> loadFeed() async {
     try {
       final client = http.Client();
-      final response = await client.get(Uri.parse(FEED_URL));
+      final response = await client.get(Uri.parse(widget.url));
       return RssFeed.parse(response.body);
     } catch (e) {
       //
@@ -114,7 +114,7 @@ class _SubFeedState extends State<SubFeed> {
       padding: EdgeInsets.only(left: 15.0),
       child: CachedNetworkImage(
         placeholder: (context, url) => Image.asset(placeholderImg),
-        imageUrl: imageUrl,
+        imageUrl: imageUrl ?? "https://picsum.photos/200/300",
         height: 50,
         width: 70,
         alignment: Alignment.center,
