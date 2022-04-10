@@ -92,25 +92,39 @@ class _AddFavouriteState extends State<AddFavourite> {
           AlertDialog(
             title: Text("Add new category"),
             content: TextField(
-              decoration: InputDecoration(hintText: "Category name"),
+              decoration: InputDecoration(
+                  hintText: "Category name",
+                  ),
               controller: category,
             ),
             actions: [
               TextButton(
                 child: Text("Add"),
                 onPressed: () async {
-                  await _favCat.add({"name": category.text});
-                  Navigator.of(context).pop();
-                  Fluttertoast.showToast(
-                      msg: "Category added",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.grey,
-                      textColor: Colors.white,
-                      fontSize: 16.0
-                  );
-                  category.clear();
+                  if(category.text.isEmpty){
+                    Fluttertoast.showToast(
+                        msg: "Name cannot be empty!",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+                  } else {
+                    await _favCat.add({"name": category.text});
+                    Navigator.of(context).pop();
+                    Fluttertoast.showToast(
+                        msg: "Category added",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+                    category.clear();
+                  }
                 },
               )
             ],
@@ -138,7 +152,8 @@ class _AddFavouriteState extends State<AddFavourite> {
             AlertDialog(
               title: Text("Edit/Delete category"),
               content: TextField(
-                decoration: InputDecoration(hintText: "New category name"),
+                decoration: InputDecoration(
+                  hintText: "New category name"),
                 controller: nameCtrl,
               ),
               actions: [
@@ -162,18 +177,30 @@ class _AddFavouriteState extends State<AddFavourite> {
                 TextButton(
                   child: Text("Save"),
                   onPressed: () async {
-                    await _favCat.doc(id).update({"name": nameCtrl.text});
-                    Fluttertoast.showToast(
-                        msg: "Edited successfully",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.grey,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                    );
-                    Navigator.of(context).pop();
-                    nameCtrl.clear();
+                    if(nameCtrl.text.isEmpty){
+                      Fluttertoast.showToast(
+                          msg: "Name cannot be empty!",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+                    } else {
+                      await _favCat.doc(id).update({"name": nameCtrl.text});
+                      Fluttertoast.showToast(
+                          msg: "Edited successfully",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+                      Navigator.of(context).pop();
+                      nameCtrl.clear();
+                    }
                   },
                 )
               ],
