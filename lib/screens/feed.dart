@@ -45,12 +45,6 @@ class _FeedState extends State<Feed> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              _deleteProduct(document.id);
-                            },
-                            icon: Icon(Icons.delete_outline,color: Colors.grey,),
-                          ),
-                          IconButton(
-                            onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) =>
@@ -58,7 +52,13 @@ class _FeedState extends State<Feed> {
                                 ),
                               );
                             },
-                            icon: Icon(Icons.edit_outlined,color: Colors.grey,),
+                            icon: Icon(Icons.edit_outlined,color: Colors.green,),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              _deleteProduct(document.id);
+                            },
+                            icon: Icon(Icons.delete_outline,color: Colors.red,),
                           ),
                         ],
                   )),
