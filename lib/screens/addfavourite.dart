@@ -156,13 +156,13 @@ class _AddFavouriteState extends State<AddFavourite> {
                         textColor: Colors.white,
                         fontSize: 16.0
                     );
-                    category.clear();
+                    nameCtrl.clear();
                   },
                 ),
                 TextButton(
                   child: Text("Save"),
                   onPressed: () async {
-                    await _favCat.doc(id).update({"name": category.text});
+                    await _favCat.doc(id).update({"name": nameCtrl.text});
                     Fluttertoast.showToast(
                         msg: "Edited successfully",
                         toastLength: Toast.LENGTH_SHORT,
