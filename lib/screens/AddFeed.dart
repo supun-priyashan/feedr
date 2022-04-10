@@ -32,10 +32,8 @@ class _AddFeedState extends State<AddFeed> {
       try {
         final client = http.Client();
         return true;
-        // if (response.body != null) {
-        //   //
-        // }
       } catch (e) {
+
         return false;
       }
     } else {
@@ -59,18 +57,19 @@ class _AddFeedState extends State<AddFeed> {
             decoration: const InputDecoration(
               hintText: 'Enter your Link',
             ),
+
             onChanged: (text) {
               setState(() {
                 _name = text;
               });
             },
-            validator: (String? value) {
+            validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter the URL';
-
               }
               return null;
             },
+
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -90,12 +89,12 @@ class _AddFeedState extends State<AddFeed> {
                       builder: (context) => Home(),
                     ),
                   );
-                  print(_name);
+                  //print(_name);
+
 
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-
                   // Process data.
                 }
               },
