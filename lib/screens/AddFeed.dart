@@ -9,7 +9,7 @@ import '../components/sidenav.dart';
 class AddFeed extends StatefulWidget {
   const AddFeed({Key? key}) : super(key: key);
 
-  final String _title = 'RSS Submission Link';
+  final String _title = 'Add New Feed';
 
   final String title = 'AddFeed';
   static const String routeName = '/AddFeed';
@@ -67,6 +67,7 @@ class _AddFeedState extends State<AddFeed> {
             validator: (String? value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter the URL';
+
               }
               return null;
             },
@@ -82,7 +83,7 @@ class _AddFeedState extends State<AddFeed> {
 
                 }
                   await _feeds.add({"url": _name});
-                Fluttertoast.showToast(msg: "RSS Feed added Successful");
+                Fluttertoast.showToast(msg: "Added Feed successfully");
                   Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import 'home.dart';
@@ -7,7 +8,7 @@ import 'home.dart';
 class UpdateFeed extends StatefulWidget {
   static const String _title = 'Update link';
 
-  final String title = 'UpdateFeed';
+  final String title = 'Update Feed';
   static const String routeName = '/updatefeed';
 
   final String feedId;
@@ -66,12 +67,14 @@ class _UpdateFeedState extends State<UpdateFeed> {
                     await urls
                         .doc(widget.feedId)
                         .update({"url": editurl.text});
+                     Fluttertoast.showToast(msg: "Updated Feed successfully");
                      Navigator.push(
                        context,
                        MaterialPageRoute(
                          builder: (context) => Home(),
                        ),
                      );
+
 
                     //}
                     // Validate will return true if the form is valid, or false if
