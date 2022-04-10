@@ -173,7 +173,7 @@ class _AddFavouriteState extends State<AddFavourite> {
                         fontSize: 16.0
                     );
                     Navigator.of(context).pop();
-                    category.clear();
+                    nameCtrl.clear();
                   },
                 )
               ],

@@ -54,6 +54,7 @@ class _SideNavState extends State<SideNav> {
               ),
               const Divider(),
               Spacer(),
+            const Divider(),
             ListTile(
                   leading: Icon(Icons.logout),
                   title: Text('Sign out'),
