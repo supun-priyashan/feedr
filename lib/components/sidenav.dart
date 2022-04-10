@@ -15,56 +15,52 @@ class SideNav extends StatefulWidget {
 }
 
 class _SideNavState extends State<SideNav> {
-
-  Widget sideNavItems(BuildContext context){
+  Widget sideNavItems(BuildContext context) {
     return Container(
-      color: Colors.black54,
-      height: MediaQuery.of(context).size.height,
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-      ),
+        color: Colors.black54,
+        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-              ListTile(
-                leading: const Icon(Icons.home_outlined),
-                title: const Text("Home"),
-                onTap: (){Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const Home()
-                ));
-                  },
-              ),
-              ListTile(
-                leading: const Icon(Icons.favorite_outline),
-                title: const Text("Favourites"),
-                onTap: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const Favourites()
-                  ));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.add),
-                title: const Text("Add new feed"),
-                onTap: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const AddFeed()
-                  ));
-                },
-              ),
-              const Divider(),
-              Spacer(),
+            ListTile(
+              leading: const Icon(Icons.home_outlined),
+              title: const Text("Home"),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const Home()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.favorite_outline),
+              title: const Text("Favourites"),
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const Favourites()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add),
+              title: const Text("Add new feed"),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const AddFeed()));
+              },
+            ),
+            const Divider(),
+            Spacer(),
             const Divider(),
             ListTile(
-                  leading: Icon(Icons.logout),
-                  title: Text('Sign out'),
+              leading: Icon(Icons.logout),
+              title: Text('Sign out'),
               onTap: () {
-                    _signOut();
+                _signOut();
               },
-              ),
-            ],
-        )
-    );
+            ),
+          ],
+        ));
   }
 
   @override
@@ -73,7 +69,7 @@ class _SideNavState extends State<SideNav> {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget> [sideNavItems(context)],
+          children: <Widget>[sideNavItems(context)],
         ),
       ),
     );
@@ -87,14 +83,6 @@ class _SideNavState extends State<SideNav> {
         builder: (context) => Login(),
       ),
     );
-    Fluttertoast.showToast(
-        msg: "Logout Success",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+    Fluttertoast.showToast(msg: "Logout Success");
   }
 }
