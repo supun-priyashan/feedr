@@ -79,7 +79,6 @@ class _AddFeedState extends State<AddFeed> {
                 if(!_ValidateURL()) {
                   Fluttertoast.showToast(msg: "Invalid URL");
                   return;
-
                 }
                   await _feeds.add({"url": _name});
                 Fluttertoast.showToast(msg: "Added Feed successfully");
