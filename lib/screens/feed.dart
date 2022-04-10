@@ -38,21 +38,30 @@ class _FeedState extends State<Feed> {
                 return Card(
                     margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: ListTile(
-                  leading: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>
-                              UpdateFeed (feedId: document.id.toString(), feedUrl:data['url'].toString()),
-                          ),);
-                        //print(document.id);
-                      },
-                      child: Text("Update")),
-                  trailing: ElevatedButton(
-                      onPressed: () {
-                        _deleteProduct(document.id);
-                      },
-                      child: Text("Delete")),
+                  trailing: SizedBox(
+                      height: 100,
+                      width: 96,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              _deleteProduct(document.id);
+                            },
+                            icon: Icon(Icons.delete_outline,color: Colors.grey,),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>
+                                    UpdateFeed (feedId: document.id.toString(), feedUrl:data['url'].toString()),
+                                ),
+                              );
+                            },
+                            icon: Icon(Icons.edit_outlined,color: Colors.grey,),
+                          ),
+                        ],
+                  )),
                   title: Text(data['url']),
                   onTap: () {
                     Navigator.push(
