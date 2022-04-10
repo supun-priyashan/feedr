@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feedr/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import '../components/sidenav.dart';
@@ -30,8 +31,6 @@ class _AddFeedState extends State<AddFeed> {
     if (Uri.parse(_name!).isAbsolute) {
       try {
         final client = http.Client();
-        // print(response);
-        // print(response.body);
         return true;
         // if (response.body != null) {
         //   //
@@ -73,14 +72,17 @@ class _AddFeedState extends State<AddFeed> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: ElevatedButton(
               onPressed: () async {
 
                 if(!_ValidateURL()) {
+                  Fluttertoast.showToast(msg: "Invalid URL");
                   return;
+
                 }
                   await _feeds.add({"url": _name});
+                Fluttertoast.showToast(msg: "RSS Feed added Successful");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -89,10 +91,10 @@ class _AddFeedState extends State<AddFeed> {
                   );
                   print(_name);
 
-
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {
+
                   // Process data.
                 }
               },
