@@ -17,6 +17,7 @@ class AddFavourite extends StatefulWidget {
 
 class _AddFavouriteState extends State<AddFavourite> {
   late TextEditingController category = TextEditingController();
+  late TextEditingController nameCtrl;
 
   final CollectionReference _favCat =
   FirebaseFirestore.instance.collection('favCat');
@@ -66,7 +67,7 @@ class _AddFavouriteState extends State<AddFavourite> {
                                       addToList(documentSnapshot.id.toString());
                                     },
                                     onLongPress: () {
-                                      print(documentSnapshot.id.toString());
+                                      nameCtrl = TextEditingController(text: documentSnapshot['name']);
                                       showEditDialog(documentSnapshot.id.toString());
                                     },
                                   ),
@@ -138,7 +139,7 @@ class _AddFavouriteState extends State<AddFavourite> {
               title: Text("Edit/Delete category"),
               content: TextField(
                 decoration: InputDecoration(hintText: "New category name"),
-                controller: category,
+                controller: nameCtrl,
               ),
               actions: [
                 TextButton(

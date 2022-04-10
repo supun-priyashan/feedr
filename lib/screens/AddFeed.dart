@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:feedr/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,12 +25,11 @@ class _AddFeedState extends State<AddFeed> {
 
   String? _name;
 
-   _ValidateURL() async {
+   bool _ValidateURL() {
     //print(_name);
     if (Uri.parse(_name!).isAbsolute) {
       try {
         final client = http.Client();
-        final response = await client.get(Uri.parse(_name!));
         // print(response);
         // print(response.body);
         return true;
@@ -77,10 +77,18 @@ class _AddFeedState extends State<AddFeed> {
             child: ElevatedButton(
               onPressed: () async {
 
-                //if(_ValidateURL()){
+                if(!_ValidateURL()) {
+                  return;
+                }
                   await _feeds.add({"url": _name});
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Home(),
+                    ),
+                  );
                   print(_name);
-                //}
+
 
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.

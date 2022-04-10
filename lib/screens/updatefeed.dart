@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'home.dart';
+
 class UpdateFeed extends StatefulWidget {
   static const String _title = 'Update link';
 
@@ -64,7 +66,13 @@ class _UpdateFeedState extends State<UpdateFeed> {
                     await urls
                         .doc(widget.feedId)
                         .update({"url": editurl.text});
-                     Navigator.of(context).pop();
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                         builder: (context) => Home(),
+                       ),
+                     );
+
                     //}
                     // Validate will return true if the form is valid, or false if
                     // the form is invalid.
